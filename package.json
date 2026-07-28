@@ -6,11 +6,11 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "build": "next build --webpack",
-    "dev": "next dev",
-    "dev:ws": "node scripts/start-ws-server.js",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:ws\"",
-    "dev:cleanup": "node scripts/ephemeral-cleanup-worker.js",
+    "build": "node init && next build --webpack",
+    "dev": "node init && next dev",
+    "dev:ws": "node init && node scripts/start-ws-server.js",
+    "dev:all": "node init && concurrently \"npm run dev\" \"npm run dev:ws\"",
+    "dev:cleanup": "node init && node scripts/ephemeral-cleanup-worker.js",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "test:unit": "vitest run",
     "test": "node scripts/verify-websocket.js",
@@ -18,7 +18,7 @@
     "test:sensitive-actions": "node scripts/test-sensitive-actions-api.mjs",
     "test:vote-remove": "node scripts/test-vote-remove-api.mjs",
     "test:ephemeral": "node scripts/test-ephemeral-cleanup.mjs",
-    "start": "next start",
+    "start": "node init && next start",
     "cleanup:worker": "node scripts/ephemeral-cleanup-worker.js",
     "cleanup:trigger": "node scripts/trigger-cleanup.mjs"
   },
